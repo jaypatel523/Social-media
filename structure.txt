@@ -1,0 +1,20 @@
+Folder structure 
+
+1. server folder 
+-> npm init -y (to create package.json)
+-> npm i (to install node_modules)
+-> install dependencies like(express, mongoose, nodemon, dotenv) depending upon your need
+-> create server using express 
+-> create directories (controllers, connectdb, routes, models)
+-> create server in app.js
+-> use nodemon ("start" : "nodemon app.js", in package.json)
+
+2. client folder 
+-> npm create vite@latest (to create vite react app)
+-> npm i (to install node_modules)
+-> npm run dev (to start react app - default it run on port : 5173)
+-> if you want to set port (server : {port : 3000}) in vite.config.js
+
+
+
+
