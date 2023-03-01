@@ -208,3 +208,8 @@ module.exports = {
     removeFollower,
     findPeople
 }
+
+
+// console.log("uncomment", req.body);
+// let result = await Post.findOneAndUpdate(req.body.postId, { $pull: { comments: { _id: req.body.commentId } } }, { new: true })
+// res.send(result);
