@@ -18,7 +18,6 @@ const PostSection = () => {
     axios
       .get(`/api/getallposts`)
       .then((res) => {
-        // console.log(res);
         setAllPost(res.data);
       })
       .catch((err) => {
