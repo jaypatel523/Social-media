@@ -1,13 +1,29 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import { MediaContext } from "../../Context";
 
 const Profile = () => {
   // console.log(sessionStorage.getItem("userId"));
   // console.log(sessionStorage.getItem("name"));
   // console.log(sessionStorage.getItem("email"));
+  const [userProfile, setUserProfile] = useState({});
 
   const { user, setUser } = useContext(MediaContext);
+
+  const { userId } = useParams();
+
+  useEffect(() => {
+    axios
+      .get(`/api/profile/${userId}`)
+      .then((res) => {
+        setUserProfile(res.data.userProfile);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <>
       <main className="bg-gray-100 bg-opacity-25">
@@ -27,7 +43,7 @@ const Profile = () => {
             <div className="w-8/12 md:w-7/12 ml-4">
               <div className="md:flex md:flex-wrap md:items-center mb-4">
                 <h2 className="text-3xl inline-block font-light md:mr-2 mb-2 sm:mb-0">
-                  mrtravlerrr_
+                  {userProfile.username}
                 </h2>
 
                 {/* <!-- badge --> */}
@@ -56,12 +72,12 @@ const Profile = () => {
               {/* <!-- post, following, followers list for medium screens --> */}
               <ul className="hidden md:flex space-x-8 mb-4">
                 <li>
-                  <span className="font-semibold">136</span>
+                  <span className="font-semibold">0</span>
                   posts
                 </li>
 
                 <li>
-                  <span className="font-semibold">40.5k</span>
+                  <span className="font-semibold">{userProfile.followers}</span>
                   followers
                 </li>
                 <li>
@@ -72,17 +88,19 @@ const Profile = () => {
 
               {/* <!-- user meta form medium screens --> */}
               <div className="hidden md:block">
-                <h1 className="font-semibold">Mr Travlerrr...</h1>
-                <span>Travel, Nature and Music</span>
-                <p>Lorem ipsum dolor sit amet consectetur</p>
+                {userProfile.bio &&
+                  userProfile.bio.map((str, index) => {
+                    return <div key={index}>{str}</div>;
+                  })}
               </div>
             </div>
 
             {/* <!-- user meta form small screens --> */}
             <div className="md:hidden text-sm my-2">
-              <h1 className="font-semibold">Mr Travlerrr...</h1>
-              <span>Travel, Nature and Music</span>
-              <p>Lorem ipsum dolor sit amet consectetur</p>
+              {userProfile.bio &&
+                userProfile.bio.map((str, index) => {
+                  return <div key={index}>{str}</div>;
+                })}
             </div>
           </header>
 

@@ -28,7 +28,7 @@ const Navbar = () => {
           </Link>
           <Link
             className="mx-2 p-2 cursor-pointer hover:bg-gray-300 ease-in-out duration-200"
-            to="/profile"
+            to={`/profile/${sessionStorage.getItem("userId")}`}
           >
             Profile
           </Link>
@@ -68,7 +68,7 @@ const Navbar = () => {
                 Messages
               </Link>
               <Link
-                to="/profile"
+                to={`/profile/${sessionStorage.getItem("userId")}`}
                 className="text-center w-full py-2 hover:bg-gray-300 cursor-pointer"
               >
                 Profile

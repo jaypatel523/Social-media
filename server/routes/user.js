@@ -1,4 +1,6 @@
 const express = require('express');
+const multer = require('multer');
+const upload = multer({ dest: "uploads/" })
 const {
     create,
     userByID,
@@ -12,7 +14,9 @@ const {
     addFollower,
     removeFollowing,
     removeFollower,
-    findPeople
+    findPeople,
+    editProfile,
+    getProfile
 } = require('../controllers/user');
 const {
     signin,
@@ -21,10 +25,18 @@ const {
     hasAuthorization
 }
     = require('../controllers/auth');
+const authentication = require('../middleware/authentication');
 
 const router = express.Router()
 
-router.route('/api/newuser').get(list).post(create)
+// my roues
+router.route('/api/newuser').post(create)
+router.route('/api/profile/:userId').get(authentication, getProfile);
+router.route('/api/editprofile').put(authentication, upload.single('profile'), editProfile);
+
+
+
+
 router.route('/api/users/photo/:userId').get(photo, defaultPhoto)
 router.route('/api/users/defaultphoto').get(defaultPhoto)
 router.route('/api/users/follow').put(requireSignin, addFollowing, addFollower)

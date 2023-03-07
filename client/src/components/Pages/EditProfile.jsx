@@ -1,30 +1,57 @@
+import axios from "axios";
 import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { MediaContext } from "../../Context";
 
 const EditProfile = () => {
+  const navigateTo = useNavigate();
   const [profileImage, setProfileImage] = useState(null);
   const [name, setName] = useState("");
   const [bio, setBio] = useState("");
 
   const { user, setUser } = useContext(MediaContext);
-  const [username, setUserName] = useState(user.username);
+  const [username, setUserName] = useState(sessionStorage.getItem("username"));
 
-  const editProfile = () => {
-    
+  const editProfile = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("profile", profileImage);
+    formData.append("userId", user.userId);
+    formData.append("username", username);
+    formData.append("name", name);
+    formData.append("bio", bio);
+
+    axios.put("/api/editprofile", formData).then((res) => {
+      if (res.data.editedUser) {
+        alert(res.data.message);
+        navigateTo("/profile");
+      } else {
+        alert(res.data.message);
+      }
+    });
   };
 
   return (
     <>
-      <div className="mt-10 flex flex-col items-center border border-black mx-60 p-10">
+      <form
+        className="mt-10 flex flex-col items-center border border-black mx-60 p-10"
+        encType="multipart/form-data"
+        onSubmit={editProfile}
+      >
         <div className="flex flex-col items-center w-full">
-          <input type="file" name="" id="profile" className="hidden" />
+          <input
+            type="file"
+            name="profile"
+            id="profile"
+            onChange={(e) => setProfileImage(e.target.files[0])}
+            className="hidden"
+          />
           <label htmlFor="profile" className="cursor-pointer inline-flex mb-4">
             <img
               src="../../../assets/default_profile.jpeg"
               alt="profile image"
               className="rounded-full w-40 h-40"
               id="profile"
-              onChange={(e) => setProfileImage(e.target.files[0])}
             />
           </label>
           <div className="" id="profile">
@@ -73,7 +100,7 @@ const EditProfile = () => {
             Edit Profile
           </button>
         </div>
-      </div>
+      </form>
     </>
   );
 };
