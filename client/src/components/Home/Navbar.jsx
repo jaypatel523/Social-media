@@ -1,16 +1,10 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const navigateTo = useNavigate();
-
   const [isHamOpen, setIsHamOpen] = useState(false);
   const handleHamburger = () => {
     setIsHamOpen(!isHamOpen);
-  };
-
-  const handleProfile = () => {
-    navigateTo("/profile");
   };
 
   return (
@@ -20,21 +14,24 @@ const Navbar = () => {
           Instagram
         </span>
         <div className="mr-4 hidden md:block">
-          <span className="mx-2 p-2 cursor-pointer hover:bg-gray-300 ease-in-out duration-200">
-            Home
-          </span>
-          <span className="mx-2 p-2 cursor-pointer hover:bg-gray-300 ease-in-out duration-200">
-            Messages
-          </span>
-          <span className="mx-2 p-2 cursor-pointer hover:bg-gray-300 ease-in-out duration-200">
-            Notifications
-          </span>
-          <span
+          <Link
+            to="/home"
             className="mx-2 p-2 cursor-pointer hover:bg-gray-300 ease-in-out duration-200"
-            onClick={handleProfile}
+          >
+            Home
+          </Link>
+          <Link
+            className="mx-2 p-2 cursor-pointer hover:bg-gray-300 ease-in-out duration-200"
+            to="/messanger"
+          >
+            Messages
+          </Link>
+          <Link
+            className="mx-2 p-2 cursor-pointer hover:bg-gray-300 ease-in-out duration-200"
+            to="/profile"
           >
             Profile
-          </span>
+          </Link>
           <span className="mx-2 p-2 cursor-pointer hover:bg-gray-300 ease-in-out duration-200">
             Logout
           </span>
@@ -58,21 +55,24 @@ const Navbar = () => {
               >
                 Close
               </button>
-              <span className="text-center w-full py-2 hover:bg-gray-300 cursor-pointer">
-                Home
-              </span>
-              <span className="text-center w-full py-2 hover:bg-gray-300 cursor-pointer">
-                Messages
-              </span>
-              <span className="text-center w-full py-2 hover:bg-gray-300 cursor-pointer">
-                Notifications
-              </span>
-              <span
+              <Link
+                to="/home"
                 className="text-center w-full py-2 hover:bg-gray-300 cursor-pointer"
-                onClick={handleProfile}
+              >
+                Home
+              </Link>
+              <Link
+                to="/messanger"
+                className="text-center w-full py-2 hover:bg-gray-300 cursor-pointer"
+              >
+                Messages
+              </Link>
+              <Link
+                to="/profile"
+                className="text-center w-full py-2 hover:bg-gray-300 cursor-pointer"
               >
                 Profile
-              </span>
+              </Link>
               <span className="text-center w-full py-2 hover:bg-gray-300 cursor-pointer">
                 Logout
               </span>

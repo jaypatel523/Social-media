@@ -18,8 +18,9 @@ const Login = () => {
     axios.post("/api/auth/signin", data).then((res) => {
       if (res.data.user) {
         sessionStorage.setItem("userId", res.data.user._id);
-        sessionStorage.setItem("name", res.data.user.name);
+        sessionStorage.setItem("username", res.data.user.username);
         sessionStorage.setItem("email", res.data.user.email);
+        alert("successfully login !");
         navigateTo("/home");
       } else {
         alert(res.data.message);

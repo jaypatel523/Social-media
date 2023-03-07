@@ -9,7 +9,7 @@ const Home = () => {
   useEffect(() => {
     setUser({
       userId: sessionStorage.getItem("userId"),
-      name: sessionStorage.getItem("name"),
+      username: sessionStorage.getItem("username"),
       email: sessionStorage.getItem("email"),
     });
   }, []);

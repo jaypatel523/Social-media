@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 const Register = () => {
-  const [name, setName] = useState("");
+  const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const data = { name, email, password };
+    const data = { username, email, password };
     axios.post("/api/newuser", data).then((res) => {
       if (res.data.user) {
         console.log(res.data.user);
@@ -48,8 +48,8 @@ const Register = () => {
                     className="bg-gray-50 border border-gray-300  sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                     placeholder="Enter your email"
                     required=""
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    value={username}
+                    onChange={(e) => setUserName(e.target.value)}
                   />
                 </div>
                 <div>

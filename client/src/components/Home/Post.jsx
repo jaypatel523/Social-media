@@ -27,7 +27,10 @@ const Post = ({ post }) => {
   const handleLike = () => {
     console.log("like");
     axios
-      .put("/api/posts/like", { userId: user.userId, postId: post._id })
+      .put("/api/posts/like", {
+        userId: user.userId,
+        postId: post._id,
+      })
       .then((res) => {
         setIsLiked(true);
       })
@@ -39,7 +42,10 @@ const Post = ({ post }) => {
   const handleUnLike = () => {
     console.log("dislike");
     axios
-      .put("/api/posts/unlike", { userId: user.userId, postId: post._id })
+      .put("/api/posts/unlike", {
+        userId: user.userId,
+        postId: post._id,
+      })
       .then((res) => {
         setIsLiked(false);
       })
@@ -102,7 +108,7 @@ const Post = ({ post }) => {
             alt="profile image"
             className="h-8 w-8 rounded-2xl mr-4"
           />
-          <div>{user.name}</div>
+          <div>{user.username}</div>
         </div>
         <img
           src={`http://localhost:8000/${imageUrl}`}
@@ -110,7 +116,7 @@ const Post = ({ post }) => {
           className=""
         />
         <div className="text-start p-2">
-          <span className="font-bold">{user.name}</span>
+          <span className="font-bold">{user.username}</span>
           <span> {text} </span>
         </div>
         <div className="flex justify-between mb-2">
@@ -170,7 +176,6 @@ const Post = ({ post }) => {
               </div>
               {comments &&
                 comments.map((comment, index) => {
-                  console.log(comment);
                   return (
                     <div key={index} className="text-start flex p-2">
                       <div className="font-bold mr-4">
