@@ -103,5 +103,6 @@ dist
 .tern-port
 
 
-server/uploads
-/server/uploads
+uploads/
+server/uploads/
+/server/uploads/
