@@ -18,14 +18,18 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use(cors());
 
-app.use('/uploads', express.static('uploads'));
 
 // production 
 // const fullPath = path.join(__dirname, '../client/dist');
 // app.use(express.static(fullPath));
 
+// app.get("/", function (req, res) {
+//     res.sendFile(path.join(__dirname, '../client/dist/index.html'))
+// })
+
 //app.use(express.static(path.join(__dirname, '../client2/dist')));
 // routes 
+app.use('/uploads', express.static('uploads'));
 app.use('/', userRouter);
 app.use('/', authRouter);
 app.use('/', postRouter);
@@ -33,15 +37,15 @@ app.use('/', postRouter);
 
 
 
-// Catch unauthorised errors
-app.use((err, req, res, next) => {
-    if (err.name === 'UnauthorizedError') {
-        res.status(401).json({ "error": err.name + ": " + err.message })
-    } else if (err) {
-        res.status(400).json({ "error": err.name + ": " + err.message })
-        console.log(err)
-    }
-})
+// // Catch unauthorised errors
+// app.use((err, req, res, next) => {
+//     if (err.name === 'UnauthorizedError') {
+//         res.status(401).json({ "error": err.name + ": " + err.message })
+//     } else if (err) {
+//         res.status(400).json({ "error": err.name + ": " + err.message })
+//         console.log(err)
+//     }
+// })
 
 
 

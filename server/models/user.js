@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
 const crypto = require('crypto');
+const { type } = require('os');
 
 const UserSchema = new mongoose.Schema({
-    name: {
+    // name is username
+    username: {
         type: String,
         trim: true,
         required: 'Name is required'
@@ -24,13 +26,15 @@ const UserSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    about: {
+    profileName: {
         type: String,
         trim: true
     },
-    photo: {
-        data: Buffer,
-        contentType: String
+    Bio: {
+        type: [String],
+    },
+    profilePicURL: {
+        type: String,
     },
     following: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
     followers: [{ type: mongoose.Schema.ObjectId, ref: 'User' }]

@@ -8,7 +8,7 @@ const fs = require('fs');
 const create = async (req, res) => {
     try {
         console.log(req.body);
-        const { name, email, password } = req.body;
+        const { username, email, password } = req.body;
         const dbemail = await User.findOne({ email });
 
         if (dbemail) {

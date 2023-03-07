@@ -3,17 +3,15 @@ import { createBrowserRouter } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Login from "./components/Authentication/Login";
 import Register from "./components/Authentication/Register";
-import Profile from "./components/Profile/Profile";
+import Profile from "./components/Pages/Profile";
+import Messages from "./components/Pages/Messages";
+import EditProfile from "./components/Pages/EditProfile";
+import { element } from "prop-types";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Login />,
-    // element: <Home />,
-  },
-  {
-    path: "/register",
-    element: <Register />,
   },
   {
     path: "/home",
@@ -22,6 +20,18 @@ const router = createBrowserRouter([
   {
     path: "/profile",
     element: <Profile />,
+  },
+  {
+    path: "/editprofile",
+    element: <EditProfile />,
+  },
+  {
+    path: "/messanger",
+    element: <Messages />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
   },
 ]);
 
