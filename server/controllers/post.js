@@ -11,6 +11,8 @@ const create = async (req, res) => {
         const caption = req.body.caption;
         const imageUrl = req.file.path;
 
+        console.log(req.file);
+
         if (!caption || !imageUrl) {
             throw new Error('please enter proper details')
         }

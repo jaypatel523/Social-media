@@ -30,7 +30,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         trim: true
     },
-    Bio: {
+    bio: {
         type: [String],
     },
     profilePicURL: {

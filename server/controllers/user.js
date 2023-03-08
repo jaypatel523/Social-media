@@ -7,7 +7,7 @@ const fs = require('fs');
 
 const create = async (req, res) => {
     try {
-        console.log(req.body);
+        // console.log(req.body);
         const { username, email, password } = req.body;
         const dbemail = await User.findOne({ email });
 
@@ -33,6 +33,45 @@ const create = async (req, res) => {
         }
     }
 }
+
+
+const editProfile = async (req, res) => {
+    try {
+
+        const profileURL = req.file.path;
+        const { username, name, userId, bio } = req.body;
+
+        let user = await User.findById(userId);
+        user.username = username;
+        user.profileName = name;
+        user.bio = bio.split('.');
+        user.profilePicURL = profileURL;
+
+        await user.save();
+        res.send({ message: 'successfullt edited !', editedUser: user });
+
+    } catch (error) {
+        res.send({ message: "can't edit your profile now. Please try again after sometime..." })
+    }
+}
+
+
+
+const getProfile = async (req, res) => {
+    try {
+        const userId = req.params.userId;
+
+        const userProfile = await User.findById(userId);
+        if (!userProfile) {
+            throw new Error('user not found');
+        }
+        res.send({ userProfile });
+
+    } catch (error) {
+        res.send({ message: "someting went wrong" })
+    }
+}
+
 
 /**
  * Load user and append to req.
@@ -206,7 +245,9 @@ module.exports = {
     addFollower,
     removeFollowing,
     removeFollower,
-    findPeople
+    findPeople,
+    editProfile,
+    getProfile
 }
 
 
